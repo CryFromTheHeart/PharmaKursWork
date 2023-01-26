@@ -1,0 +1,92 @@
+﻿@model PharmaKursWork.ViewModels.ChallengeViewModels.ChallengeViewModel
+@inject PharmaKursWork.Servises.UserServise userService;
+@{
+    var isCurrentUserAdmin = userService.isCurrentUserAdmin();
+}
+<div class="text-center">
+    @if (isCurrentUserAdmin) {
+        <button type="button" 
+                class="btn btn-primary ks-addbutton rounded-circle d-flex p-3"
+            data-action="@Url.Action("AddChallenge", "Challenge")">
+            <img style="width: 40px; height: 40px" src="icons/plus.svg" />
+        </button>
+    }
+    <div class="modal-container"></div>
+    <!-- Modal -->
+    @if (Model.List.Count > 0)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>@Html.DisplayNameFor(_ => Model.View.Name)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.View.ChallegesStart)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.View.MedName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.View.TechStaffName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.View.ScientistName)</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var chal in Model.List)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @if(isCurrentUserAdmin)
+                            {
+                                <button class="ks-tablebuttons editButton" data-action="@Url.Action("EditChallenge", "Challenge", new { id = chal.Id })"><img src="icons/pencil-square.svg" /></button>
+                                <a class="ks-tablebuttons deleteButton" asp-action="Delete" asp-controller="Challenge" asp-route-id="@chal.Id"><img src="icons/trash3-fill.svg" /></a>
+                            }
+                        </td>
+                        <td class="align-middle">@chal.Name</td>
+                        <td class="align-middle">@chal.ChallegesStart</td>
+                        <td class="align-middle">@chal.MedName</td>
+                        <td class="align-middle">@chal.TechStaffName</td>
+                        <td class="align-middle">@chal.ScientistName</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center"><h3>Данных нет</h3></div>
+    }
+</div>
+
+<script>
+    $(function () {
+        const addButtons = document.querySelectorAll(".ks-addbutton");
+
+        const deleteButtons = document.querySelectorAll(".deleteButton");
+        deleteButtons.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        })
+
+        const editButtons = document.querySelectorAll(".editButton");
+        editButtons.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        });
+
+        $(editButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-container").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+
+        $(addButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-container").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+    });
+</script>
