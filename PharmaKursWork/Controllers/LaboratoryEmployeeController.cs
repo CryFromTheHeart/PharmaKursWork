@@ -225,6 +225,9 @@ namespace PharmaKursWork.Controllers
 
             if (scientist == default || emp == default)
                 return View("Index");
+            var challenge = _db.Challenges.FirstOrDefault(u => u.ScientistId == scientist.LaboratoryEmployeeId);
+            if (challenge != default)
+                return RedirectToAction("Index");
 
             _db.Scientists.Remove(scientist);
             _db.LaboratoryEmployees.Remove(emp);
@@ -241,6 +244,10 @@ namespace PharmaKursWork.Controllers
 
             if (techStaff == default || emp == default)
                 return View("Index");
+
+            var challenge = _db.Challenges.FirstOrDefault(u => u.TechStaffId == techStaff.LaboratoryEmployeeId);
+            if (challenge != default)
+                return RedirectToAction("Index");
 
             _db.TechStaffs.Remove(techStaff);
             _db.LaboratoryEmployees.Remove(emp);
