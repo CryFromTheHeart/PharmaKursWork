@@ -1,6 +1,6 @@
 # PharmaKursWork
 Предметная область: фармацевтическая компания
    При запуске создается админ: 
-      login: admin
-      password 123456
+      login: admin,
+      password: 123456
       
