@@ -47,14 +47,10 @@ namespace PharmaKursWork.ViewModels.MedViewModels
 
     public class FilterViewModel
     {
-        [DisplayName("Начало разработки")]
-        public DateTime? StartExploring { get; set; }
 
         [DisplayName("Название")]
         public string Name { get; set; }
 
-        [DisplayName("Вклад")]
-        public decimal Expenses { get; set; }
         
     }
 }
