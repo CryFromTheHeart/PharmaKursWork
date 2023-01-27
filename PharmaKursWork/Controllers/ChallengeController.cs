@@ -169,6 +169,7 @@ namespace PharmaKursWork.Controllers
             var challenge = (from c in _db.Challenges where c.Id == id select c).FirstOrDefault();
             if (challenge == default)
                 return View("Index");
+
             _db.Challenges.Remove(challenge);
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");

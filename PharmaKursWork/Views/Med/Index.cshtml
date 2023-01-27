@@ -14,20 +14,8 @@
                 <div class="col-auto flex-grow-1">
                     <input asp-for="FilterViewModel.Name" class="form-control" id="FirstName">
                 </div>
-                <div class="col-auto">
-                    <label for="FirstName" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.StartExploring)</label>
-                </div>
-                <div class="col-auto flex-grow-1">
-                    <input asp-for="FilterViewModel.StartExploring" class="form-control" id="FirstName">
-                </div>
-                <div class="col-auto">
-                    <label for="FirstName" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.Expenses)</label>
-                </div>
-                <div class="col-auto flex-grow-1">
-                    <input asp-for="FilterViewModel.Expenses" class="form-control" id="FirstName">
-                </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Отфильтровать</button>
+            <button type="submit" class="btn btn-primary mt-2">Поиск</button>
         </form>
         <a class="btn btn-primary mt-2" asp-action="Index" asp-controller="Med">Сбросить</a>
     </div>

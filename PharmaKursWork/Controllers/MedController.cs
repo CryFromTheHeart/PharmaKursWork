@@ -58,9 +58,9 @@ namespace PharmaKursWork.Controllers
                 {
                     meds = meds.Where(m => m.StartExploring > filter.StartExploring);
                 }
-                if (filter.Expenses > 0)
+                if (filter.Expenses != 0)
                 {
-                    meds = meds.Where(m => m.Expenses > filter.Expenses);
+                    meds = meds.Where(m => ((int)m.Expenses) > ((int)filter.Expenses));
                 }
 
             }

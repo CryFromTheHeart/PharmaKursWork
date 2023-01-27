@@ -46,7 +46,7 @@ namespace PharmaKursWork.Data
                     },
                     new CommodityGroup()
                     {
-                        Name = "Гармоны",
+                        Name = "Гормоны",
                         Desc = "????",
                     },
                 });
@@ -66,11 +66,6 @@ namespace PharmaKursWork.Data
                     {
                         Name = "Улгту",
                         Adress = "северный венец 32",
-                    },
-                    new Laboratory()
-                    {
-                        Name = "Гармоны",
-                        Adress = "????",
                     },
                 });
                 dataContext.SaveChanges();

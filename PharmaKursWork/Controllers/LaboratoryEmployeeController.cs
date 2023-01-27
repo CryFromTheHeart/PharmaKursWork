@@ -85,13 +85,13 @@ namespace PharmaKursWork.Controllers
         [HttpPost]
         public async Task<IActionResult> AddScientist(AddScientistViewModel model)
         {
-            var scient = model.ScientistModel;
-            var emp = model.LaboratoryEmployeeModel;
+            var scientist = model.ScientistModel;
+            var employee = model.LaboratoryEmployeeModel;
 
-            await _db.LaboratoryEmployees.AddAsync(emp);
+            await _db.LaboratoryEmployees.AddAsync(employee);
             await _db.SaveChangesAsync();
-            scient.LaboratoryEmployeeId = emp.Id;
-            await _db.Scientists.AddAsync(scient);
+            scientist.LaboratoryEmployeeId = employee.Id;
+            await _db.Scientists.AddAsync(scientist);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Index");
@@ -221,16 +221,16 @@ namespace PharmaKursWork.Controllers
         public async Task<IActionResult> DeleteScientist(int id)
         {
             var scientist = (from c in _db.Scientists where c.LaboratoryEmployeeId == id select c).FirstOrDefault();
-            var emp = (from e in _db.LaboratoryEmployees where e.Id == id select e).FirstOrDefault();
+            var employee = (from e in _db.LaboratoryEmployees where e.Id == id select e).FirstOrDefault();
 
-            if (scientist == default || emp == default)
+            if (scientist == default || employee == default)
                 return View("Index");
             var challenge = _db.Challenges.FirstOrDefault(u => u.ScientistId == scientist.LaboratoryEmployeeId);
             if (challenge != default)
                 return RedirectToAction("Index");
 
             _db.Scientists.Remove(scientist);
-            _db.LaboratoryEmployees.Remove(emp);
+            _db.LaboratoryEmployees.Remove(employee);
 
             await _db.SaveChangesAsync();
 
@@ -240,9 +240,9 @@ namespace PharmaKursWork.Controllers
         public async Task<IActionResult> DeleteTechStaff(int id)
         {
             var techStaff = (from c in _db.TechStaffs where c.LaboratoryEmployeeId == id select c).First();
-            var emp = (from e in _db.LaboratoryEmployees where e.Id == id select e).First();
+            var employee = (from e in _db.LaboratoryEmployees where e.Id == id select e).First();
 
-            if (techStaff == default || emp == default)
+            if (techStaff == default || employee == default)
                 return View("Index");
 
             var challenge = _db.Challenges.FirstOrDefault(u => u.TechStaffId == techStaff.LaboratoryEmployeeId);
@@ -250,7 +250,7 @@ namespace PharmaKursWork.Controllers
                 return RedirectToAction("Index");
 
             _db.TechStaffs.Remove(techStaff);
-            _db.LaboratoryEmployees.Remove(emp);
+            _db.LaboratoryEmployees.Remove(employee);
 
             await _db.SaveChangesAsync();
 

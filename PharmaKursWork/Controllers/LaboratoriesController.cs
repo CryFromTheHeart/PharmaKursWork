@@ -56,6 +56,9 @@ namespace PharmaKursWork.Controllers
         public async Task<IActionResult> EditLab(EditLaboratoriesModalViewModel labData)
         {
             var lab = (from l in _db.Laboratories where labData.Id == l.Id select l).First();
+            if (lab == default)
+                return View("Index");
+
             lab.Name = labData.Name;
             lab.Adress = labData.Adress;
 
