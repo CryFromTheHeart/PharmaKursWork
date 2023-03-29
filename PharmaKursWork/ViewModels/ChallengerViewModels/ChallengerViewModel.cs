@@ -7,7 +7,7 @@ namespace PharmaKursWork.ViewModels.ChallengerViewModels
     public class ChallengerViewModel
     {
         public SelectList ChallengeSelectList { get; set; }
-
+        public List<ChallengerModel> List { get; set; }
         public ChallengerModel ChallengerModel { get; set; }
     }
 
@@ -27,9 +27,14 @@ namespace PharmaKursWork.ViewModels.ChallengerViewModels
         [Required(ErrorMessage = "Укажите противопоказания")]
         public string Contraindications { get; set; }
 
+
+        [DisplayName("Наименование испытания")]
+        [Required(ErrorMessage = "Укажите испытание")]
+        public string? ChallengeName { get; set; }
+
         [DisplayName("Испытание")]
         [Required(ErrorMessage = "Укажите испытание")]
-        public int ChallengeId { get; set; }
+        public int? ChallengeId { get; set; }
 
     }
 }

@@ -15,20 +15,31 @@ namespace PharmaKursWork.Controllers
             _db = db;
             _userServise = userService;
         }
-
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(CommodityGroupViewModel viewModel)
         {
             var user = _userServise.getCurrentUser();
 
+            var filter = viewModel.FilterViewModel;
 
             if (user == null || user.Username == "Guest")
             {
                 return RedirectToAction("Index", "Account");
             }
 
+            var cmg = _db.CommodityGroups.AsQueryable();
+
+            if (filter != null)
+            {
+                if (!string.IsNullOrEmpty(filter.Name))
+                {
+                    cmg = cmg.Where(c => c.Name.Contains(filter.Name));
+                }
+            }
+
             var model = new CommodityGroupViewModel
             {
-                List = _db.CommodityGroups.ToList(),
+                List = cmg.ToList(),
             };
 
             return View(model);

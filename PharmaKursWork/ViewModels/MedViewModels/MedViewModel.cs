@@ -48,9 +48,13 @@ namespace PharmaKursWork.ViewModels.MedViewModels
     public class FilterViewModel
     {
 
-        [DisplayName("Название")]
-        public string Name { get; set; }
+        [DisplayName("Минимальный вклад")]
+        public decimal MinExpenses { get; set; }
 
-        
+        [DisplayName("Максимальный вклад")]
+        public decimal MaxExpenses { get; set; }
+
+        [DisplayName("Название")]
+        public string Name { get; set; }        
     }
 }

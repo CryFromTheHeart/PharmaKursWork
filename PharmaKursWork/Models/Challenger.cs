@@ -14,9 +14,9 @@ namespace PharmaKursWork.Models
         
         [ForeignKey(nameof(Id))]
         public User User { get; set; }
-        public int ChallengeId { get; set; }
+        public int? ChallengeId { get; set; }
         
         [ForeignKey(nameof(ChallengeId))]
-        public Challenge Challenge { get; set; }
+        public Challenge? Challenge { get; set; }
     }
 }

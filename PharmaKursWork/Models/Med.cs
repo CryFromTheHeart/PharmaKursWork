@@ -12,7 +12,8 @@ namespace PharmaKursWork.Models
         public DateTime StartExploring { get; set; }
         
         public decimal Expenses { get; set; }
-        
+        public string Contraindications { get; set; }
+
         public int LabratoryId { get; set; }
         [ForeignKey(nameof(LabratoryId))]
         public Laboratory Laboratory { get; set; }

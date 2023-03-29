@@ -9,10 +9,26 @@
         <form asp-action="Index" asp-controller="Med" method="get">
             <div class="mb-3 row align-items-center">
                 <div class="col-auto">
-                    <label for="FirstName" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.Name)</label>
+                    <label for="MedName" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.Name)</label>
                 </div>
                 <div class="col-auto flex-grow-1">
-                    <input asp-for="FilterViewModel.Name" class="form-control" id="FirstName">
+                    <input asp-for="FilterViewModel.Name" class="form-control" id="MedName">
+                </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+                <div class="col-auto">
+                    <label for="Expenses" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.MinExpenses)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="FilterViewModel.MinExpenses" class="form-control" id="Expenses">
+                </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+                <div class="StartExploring">
+                    <label for="FirstName" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.MaxExpenses)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="FilterViewModel.MaxExpenses" class="form-control" id="StartExploring">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mt-2">Поиск</button>

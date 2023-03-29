@@ -7,7 +7,7 @@ namespace PharmaKursWork.ViewModels.CommodityGroupModels
     public class CommodityGroupViewModel
     {
         public CommodityGroupCustomModel CommodityGroupCustomModel { get; set; }
-
+        public FilterViewModel FilterViewModel { get; set; }
         public List<CommodityGroup> List { get; set; }
     }
 
@@ -22,5 +22,11 @@ namespace PharmaKursWork.ViewModels.CommodityGroupModels
         [DisplayName("Описание")]
         [Required(ErrorMessage = "Укажите описание")]
         public string Desc { get; set; }
+    }
+
+    public class FilterViewModel
+    {
+        [DisplayName("Название")]
+        public string Name { get; set; }
     }
 }

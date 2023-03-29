@@ -16,10 +16,6 @@ namespace PharmaKursWork.ViewModels.ChallengeViewModels
         [Required(ErrorMessage = "Укажите начало испытания")]
         public DateTime ChallegesStart { get; set; }
 
-        [DisplayName("Конец испытания")]
-        [Required(ErrorMessage = "Укажите конец испытания")]
-        public DateTime ChallegesEnd { get; }
-
         [DisplayName("Испытание курирует")]
         [Required(ErrorMessage = "Укажите Ученого")]
         public string ScientistName { get; set; } = string.Empty;
@@ -38,5 +34,19 @@ namespace PharmaKursWork.ViewModels.ChallengeViewModels
         public AddChallengeViewModel AddView { get; set; }
         public ChallengeView View { get; set; }
         public List<ChallengeView> List { get; set; }
+        public FilterViewModel FilterViewModel { get; set; }
+    }
+
+    public class FilterViewModel
+    {
+
+        [DisplayName("Минимальная дата")]
+        public DateTime MinChallegesStart { get; set; }
+
+        [DisplayName("Максимальная дата")]
+        public DateTime MaxChallegesStart { get; set; }
+
+        [DisplayName("Название")]
+        public string Name { get; set; }
     }
 }

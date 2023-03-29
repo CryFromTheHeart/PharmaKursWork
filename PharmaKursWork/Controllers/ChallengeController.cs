@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PharmaKursWork.Models;
 using PharmaKursWork.Servises;
 using PharmaKursWork.ViewModels.ChallengeViewModels;
+using PharmaKursWork.ViewModels.MedViewModels;
 
 namespace PharmaKursWork.Controllers
 {
@@ -17,8 +18,8 @@ namespace PharmaKursWork.Controllers
             _db = db;
             _userServise = userService;
         }
-
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(ChallengeViewModel? challengeModel)
         {
             var user = _userServise.getCurrentUser();
 
@@ -27,6 +28,8 @@ namespace PharmaKursWork.Controllers
             {
                 return RedirectToAction("Index", "Account");
             }
+
+            var filter = challengeModel.FilterViewModel;
 
             var meds = (from m in _db.Meds select m);
             var scientist = (from s in _db.Scientists
@@ -49,11 +52,28 @@ namespace PharmaKursWork.Controllers
                                   MedName = m.Name,
                                   ScientistName = s.Name,
                                   TechStaffName = t.Name,
-                              }).ToList();
+                              });
+
+            if (filter != null)
+            {
+                if (!string.IsNullOrEmpty(filter.Name))
+                {
+                    challenges = challenges.Where(m => m.Name.Contains(filter.Name));
+                }
+
+                if (filter.MinChallegesStart != DateTime.MinValue)
+                {
+                    challenges = challenges.Where(m => m.ChallegesStart > filter.MinChallegesStart);
+                }
+                if (filter.MaxChallegesStart != DateTime.MinValue)
+                {
+                    challenges = challenges.Where(m => m.ChallegesStart < filter.MaxChallegesStart);
+                }
+            }
 
             var model = new ChallengeViewModel
             {
-                List = challenges,
+                List = challenges.ToList(),
             };
 
             return View(model);

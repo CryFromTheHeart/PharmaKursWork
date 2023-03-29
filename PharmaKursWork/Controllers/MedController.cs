@@ -46,13 +46,26 @@ namespace PharmaKursWork.Controllers
                     CommodityName = c.Name,
                     UnitMeasureName = u.Name,
                 }
-            );
+            ).AsQueryable();
 
             if (filter != null)
             {
-                if (filter.Name != "")
+                if (!string.IsNullOrEmpty(filter.Name))
                 {
-                    meds = meds.Where(m => m.Name == filter.Name);
+                    meds = meds.Where(m => m.Name.Contains(filter.Name));
+                }
+
+                if (filter.MinExpenses > 0 && filter.MaxExpenses > 0)
+                {
+                    meds = meds.Where(m => m.Expenses > filter.MinExpenses && m.Expenses < filter.MaxExpenses);
+                }
+                else if (filter.MinExpenses > 0)
+                {
+                    meds = meds.Where(m => m.Expenses > filter.MinExpenses);
+                }
+                else if (filter.MaxExpenses > 0)
+                {
+                    meds = meds.Where(m => m.Expenses < filter.MaxExpenses);
                 }
             }
 
@@ -147,7 +160,7 @@ namespace PharmaKursWork.Controllers
             var med = new Med
             {
                 Name = medData.Name,
-                StartExploring = DateTime.Now,
+                StartExploring = DateTime.Now.Date,
                 Expenses = medData.Expenses,
                 LabratoryId = medData.LabratoryId,
                 CommodityGroupId = medData.CommodityGroupId,

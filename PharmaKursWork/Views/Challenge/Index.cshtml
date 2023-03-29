@@ -4,6 +4,36 @@
     var isCurrentUserAdmin = userService.isCurrentUserAdmin();
 }
 <div class="text-center">
+    <div>
+        <form asp-action="Index" asp-controller="Challenge" method="get">
+            <div class="mb-3 row align-items-center">
+                <div class="col-auto">
+                    <label for="MedName" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.Name)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="FilterViewModel.Name" class="form-control" id="MedName">
+                </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+                <div class="col-auto">
+                    <label for="Expenses" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.MinChallegesStart)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="FilterViewModel.MinChallegesStart" class="form-control" id="Expenses">
+                </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+                <div class="StartExploring">
+                    <label for="FirstName" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.MaxChallegesStart)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="FilterViewModel.MaxChallegesStart" class="form-control" id="StartExploring">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Поиск</button>
+        </form>
+        <a class="btn btn-primary mt-2" asp-action="Index" asp-controller="Challenge">Сбросить</a>
+    </div>
     @if (isCurrentUserAdmin) {
         <button type="button" 
                 class="btn btn-primary ks-addbutton rounded-circle d-flex p-3"
