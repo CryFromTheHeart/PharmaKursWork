@@ -43,6 +43,8 @@ namespace PharmaKursWork.ViewModels.MedViewModels
         public SelectList UnitMeasuresList { get; set; }
 
         public FilterViewModel FilterViewModel { get; set; }
+
+        public DonatProcedure Donat { get; set; }  
     }
 
     public class FilterViewModel
@@ -56,5 +58,13 @@ namespace PharmaKursWork.ViewModels.MedViewModels
 
         [DisplayName("Название")]
         public string Name { get; set; }        
+    }
+
+    public class DonatProcedure
+    {
+        [DisplayName("Максимальный вклад")]
+        public decimal Expenses { get; set; }
+
+        public string Name { get; set; }
     }
 }

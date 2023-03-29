@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PharmaKursWork.Models;
 using PharmaKursWork.Servises;
 using PharmaKursWork.ViewModels.MedViewModels;
+using System.Data;
+using System.Xml.Linq;
 
 namespace PharmaKursWork.Controllers
 {
@@ -181,6 +185,25 @@ namespace PharmaKursWork.Controllers
                 return View("Index");
             _db.Meds.Remove(med);
             await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> HandleDonat(DonatProcedure donat)
+        {
+            if (donat.Expenses <= 0)
+            {
+                return RedirectToAction("Index");
+            }
+
+            object[] params1 = 
+            {
+                new SqlParameter("@medName", donat.Name),
+                new SqlParameter("@donate", donat.Expenses),
+            };
+
+            _db.Database.ExecuteSqlRaw("addDonate {0}, {1}", params1);
+
             return RedirectToAction("Index");
         }
     }
